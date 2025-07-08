@@ -18,4 +18,6 @@ curl -X 'POST' \
 curl -X 'GET' \
   'https://localhost:7160/api/v1/Incident?SearchTerm=test&Page=1&Size=10' \
   -H 'accept: */*'
-```	
+```
+
+You can also launch the project as it's configured with Swagger to test the endpoints!
