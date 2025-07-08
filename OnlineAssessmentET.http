@@ -1,0 +1,6 @@
+@OnlineAssessment_ET_HostAddress = https://localhost:7160/api/v1
+
+GET {{OnlineAssessment_ET_HostAddress}}/incident?SearchTerm=test&page=1&size=10
+Accept: application/json
+
+###
