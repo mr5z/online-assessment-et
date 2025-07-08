@@ -1,3 +1,4 @@
 ﻿using System.Runtime.CompilerServices;
 
-[assembly: InternalsVisibleTo("OnlineAssessmentET")]
+[assembly: InternalsVisibleTo("OnlineAssessmentET.Backend")]
+[assembly: InternalsVisibleTo("OnlineAssessmentET.Frontend")]

@@ -1,7 +1,9 @@
 ﻿namespace OnlineAssessmentET.Core.Dto.Responses.Incidents;
 
-internal class FindIncidentResponse
+internal record FindIncidentResponse
 {
+	public required int Id { get; init; }
+
 	public required Severity Severity { get; init; }
 
 	public required string Title { get; init; }

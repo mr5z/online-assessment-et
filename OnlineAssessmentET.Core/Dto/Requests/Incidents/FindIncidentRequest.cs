@@ -1,6 +1,6 @@
 ﻿namespace OnlineAssessmentET.Core.Dto.Requests.Incidents;
 
-internal class FindIncidentRequest
+internal record FindIncidentRequest
 {
 	public required string? SearchTerm { get; init; }
 

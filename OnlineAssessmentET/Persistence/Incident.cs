@@ -8,6 +8,8 @@ internal class Incident
 
 	public const int DescriptionMaxLength = 1_000;
 
+	public const int SearchTermMaxLength = 100;
+
 	public int Id { get; set; }
 
 	public Severity Severity { get; set; }

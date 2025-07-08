@@ -76,20 +76,32 @@ internal class IncidentService(AppDbContext dbContext) : IIncidentService
 			return Result.Fail<FindIncidentResponse[]>(ErrorCode.InvalidParameter, "Invalid size value.");
 		}
 
-		if (request.SearchTerm.Length > 100)
+		if (request.SearchTerm.Length > Incident.SearchTermMaxLength)
 		{
 			return Result.Fail<FindIncidentResponse[]>(ErrorCode.InvalidParameter, "Search term exceeded max characters.");
 		}
 
-		var incidents = await dbContext.Incidents
-			.Where(i =>
-				(i.Title != null && i.Title.Contains(request.SearchTerm, StringComparison.InvariantCultureIgnoreCase)) ||
-				(i.Description != null && i.Description.Contains(request.SearchTerm, StringComparison.InvariantCultureIgnoreCase)))
+		var searchTerm = request.SearchTerm.Trim();
+		var hasSearch = !string.IsNullOrWhiteSpace(searchTerm) && searchTerm != "*";
+
+		IQueryable<Incident> query = dbContext.Incidents;
+
+		if (hasSearch)
+		{
+			var pattern = EscapeLikePattern(searchTerm);
+
+			query = query.Where(i =>
+				(i.Title != null && EF.Functions.Like(i.Title, pattern)) ||
+				(i.Description != null && EF.Functions.Like(i.Description, pattern)));
+		}
+
+		var incidents = await query
 			.Skip((request.Page - 1) * request.Size)
 			.Take(request.Size)
 			.OrderByDescending(i => i.CreatedAt)
 			.Select(i => new FindIncidentResponse
 			{
+				Id = i.Id,
 				Severity = i.Severity,
 				Title = i.Title,
 				Description = i.Description,
@@ -105,4 +117,13 @@ internal class IncidentService(AppDbContext dbContext) : IIncidentService
 
 		return Result.Ok(incidents);
 	}
+
+	private static string EscapeLikePattern(string input)
+	{
+		return input.Replace("[", "[[]")
+					.Replace("%", "[%]")
+					.Replace("_", "[_]")
+					.Replace("*", "%");
+	}
+
 }
