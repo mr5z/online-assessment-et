@@ -20,4 +20,7 @@ curl -X 'GET' \
   -H 'accept: */*'
 ```
 
+## Note
+Business logic is mainly at [IncidentService.cs](https://github.com/mr5z/online-assessment-et/blob/main/OnlineAssessmentET/Services/Implementations/IncidentService.cs)
+
 You can also launch the project as it's configured with Swagger to test the endpoints!
