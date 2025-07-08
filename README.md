@@ -1,26 +1,5 @@
-# Create an incident
+# Task A
+![image](https://github.com/user-attachments/assets/faa43473-5b36-42cc-b2fe-cf0c524ba4f0)
 
-```
-curl -X 'POST' \
-  'https://localhost:7160/api/v1/Incident' \
-  -H 'accept: */*' \
-  -H 'Content-Type: application/json' \
-  -d '{
-  "severity": 2,
-  "title": "string 1",
-  "description": "string 1"
-}'
-```
-
-# Get incidents
-
-```
-curl -X 'GET' \
-  'https://localhost:7160/api/v1/Incident?SearchTerm=test&Page=1&Size=10' \
-  -H 'accept: */*'
-```
-
-## Note
-Business logic is mainly at [IncidentService.cs](https://github.com/mr5z/online-assessment-et/blob/main/OnlineAssessmentET/Services/Implementations/IncidentService.cs)
-
-You can also launch the project as it's configured with Swagger to test the endpoints!
+# Task B
+![image](https://github.com/user-attachments/assets/426840b1-e917-4d69-aee9-b39a6894a766)
