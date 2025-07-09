@@ -14,8 +14,7 @@ Behind a load balancer, sticky sessions are required to keep users on the same s
 For cases where component state should persist after a page reload, Fluxor store can easily be extended to save and restore state.
 
 # Task C
-![image](https://github.com/user-attachments/assets/9839dde2-0f6b-4e5c-9d53-b489c3ba1de4)
-
+![image](https://github.com/user-attachments/assets/75adca89-7c22-4a25-bdde-b9404c3a9453)
 
 # Task D
 
