@@ -7,7 +7,7 @@ namespace OnlineAssessmentET.Services;
 
 internal interface IIncidentService
 {
-	Task<IResult> ReportIncident(ReportIncidentRequest request);
+	Task<IResult> ReportIncident(ReportIncidentRequest request, CancellationToken cancellation = default);
 
-	Task<Result<FindIncidentResponse[]>> FindIncidents(FindIncidentRequest request);
+	Task<Result<FindIncidentResponse[]>> FindIncidents(FindIncidentRequest request, CancellationToken cancellation = default);
 }

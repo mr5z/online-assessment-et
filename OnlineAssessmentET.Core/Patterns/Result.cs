@@ -6,11 +6,13 @@ internal enum ErrorCode
 {
 	None = 0,
 
-	InvalidParameter = 1,
+	Unhandled = 1,
 
-	Duplicate = 2,
+	InvalidParameter = 2,
 
-	NotFound = 3,
+	Duplicate = 3,
+
+	NotFound = 4,
 }
 
 internal interface IResult
