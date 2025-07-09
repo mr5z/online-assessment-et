@@ -53,6 +53,85 @@ internal class Incident
 As for the validation, I would move it on a different layer, not within `Incident` class.
 E.g., using `FluentValidation` for such tasks.
 
+### Usage sample
+
+<details>
+
+<summary>Click to collapse</summary>
+  
+```
+using System;
+					
+public class Program
+{
+	internal enum Severity { Low, Medium, High }
+	
+	internal class Incident
+	{
+		public required Severity Severity { get; init; }
+		public required string? Title { get; init; }
+		public required DateTimeOffset DateReported { get; init; }
+
+		public float CalculateUrgency()
+		{
+			var now = DateTimeOffset.Now;
+			var datePassed = now - DateReported;
+
+			int severityWeight = Severity switch
+			{
+				Severity.Low => 1,
+				Severity.Medium => 2,
+				Severity.High => 3,
+				_ => 0
+			};
+
+			var hoursPassed = (float)datePassed.TotalHours;
+			return severityWeight * (1 + hoursPassed / 24);
+		}
+	}
+	
+	public static void Main()
+	{
+		DateTimeOffset fixedNow = new DateTimeOffset(2025, 7, 9, 12, 0, 0, TimeSpan.FromHours(8));
+		
+		var incident1 = new Incident
+		{
+			Severity = Severity.Low,
+			Title = "Minor display bug",
+			DateReported = fixedNow.AddHours(-2) // 2 hours ago
+		};
+		
+		var incident2 = new Incident
+		{
+			Severity = Severity.Medium,
+			Title = "Performance degradation",
+			DateReported = fixedNow.AddHours(-12) // 12 hours ago
+		};
+		
+		var incident3 = new Incident
+		{
+			Severity = Severity.High,
+			Title = "System outage over weekend",
+			DateReported = fixedNow.AddHours(-72) // 3 days ago
+		};
+		
+		var incident4 = new Incident
+		{
+			Severity = Severity.High,
+			Title = "Immediate crash after update",
+			DateReported = fixedNow // Now
+		};
+		
+		Console.WriteLine(incident1.CalculateUrgency());
+		Console.WriteLine(incident2.CalculateUrgency());
+		Console.WriteLine(incident3.CalculateUrgency());
+		Console.WriteLine(incident4.CalculateUrgency());
+	}
+}
+```
+ 
+</details>
+
 ### Sample output
 
 | Severity | Hours Passed | Urgency |
