@@ -15,3 +15,42 @@ For cases where component state should persist after a page reload, Fluxor store
 
 # Task C
 ![image](https://github.com/user-attachments/assets/9839dde2-0f6b-4e5c-9d53-b489c3ba1de4)
+
+
+# Task D
+
+```
+internal enum Severity { Low, Medium, High }
+
+internal class Incident
+{
+	public required Severity Severity { get; init; }
+	public required string? Title { get; init; }
+	public required DateTimeOffset DateReported { get; init; }
+
+	float CalculateUrgency()
+	{
+		var now = DateTimeOffset.Now;
+		var datePassed = now - DateReported;
+
+		int severityWeight = Severity switch
+		{
+			Severity.Low => 1,
+			Severity.Medium => 2,
+			Severity.High => 3,
+			_ => 0,
+		};
+
+		var hoursPassed = (float)datePassed.TotalHours;
+		return severityWeight * (1 + hoursPassed / 24);
+	}
+}
+```
+### Sample output
+
+| Severity | Hours Passed | Urgency |
+|----------|--------------|---------|
+| Low      | 2            | 0.99    |
+| Medium   | 12           | 2.81    |
+| High     | 72           | 11.7    |
+| High     | 0            | 2.72    |
