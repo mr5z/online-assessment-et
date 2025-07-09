@@ -1,0 +1,35 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:OnlineAssessmentET.Mobile.ViewModels"
+             x:Class="OnlineAssessmentET.Mobile.MainPage"
+             x:DataType="vm:MainPageViewModel"
+             Title="Report Incident">
+
+	<ScrollView>
+		<VerticalStackLayout Padding="20" Spacing="15">
+
+			<Label Text="Severity" FontAttributes="Bold"/>
+			<Picker x:Name="SeverityPicker"
+                    Title="Select Severity"
+                    ItemsSource="{Binding Severities}"
+                    SelectedItem="{Binding SelectedSeverity}" />
+
+			<Label Text="Title" FontAttributes="Bold"/>
+			<Entry Placeholder="Enter incident title"
+                   Text="{Binding IncidentTitle}" />
+
+			<Label Text="Description" FontAttributes="Bold"/>
+			<Editor Placeholder="Describe the incident"
+                    AutoSize="TextChanges"
+                    HeightRequest="120"
+                    Text="{Binding Description}" />
+
+			<Button Text="Submit Incident"
+                    Command="{Binding SubmitCommand}"
+                    BackgroundColor="DarkGreen"
+                    TextColor="White"/>
+
+		</VerticalStackLayout>
+	</ScrollView>
+</ContentPage>
