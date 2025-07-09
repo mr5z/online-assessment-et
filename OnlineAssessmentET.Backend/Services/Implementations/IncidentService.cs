@@ -64,7 +64,7 @@ internal class IncidentService(ILogger<IncidentService> logger, AppDbContext dbC
 		{
 			const string error = "An error occurred whilst trying to report an incident (Title: {Title}).";
 			logger.LogError(ex, error, request.Title);
-			return Result.Fail(ErrorCode.Unhandled, error);
+			return Result.Fail(ErrorCode.General, error);
 		}
 	}
 
@@ -132,7 +132,7 @@ internal class IncidentService(ILogger<IncidentService> logger, AppDbContext dbC
 		{
 			const string error = "An error occurred whilst trying to find an incident (SearchTerm: {SearchTerm}).";
 			logger.LogError(ex, error, request.SearchTerm);
-			return Result.Fail<FindIncidentResponse[]>(ErrorCode.Unhandled, error);
+			return Result.Fail<FindIncidentResponse[]>(ErrorCode.General, error);
 		}
 	}
 

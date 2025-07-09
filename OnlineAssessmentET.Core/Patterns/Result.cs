@@ -6,7 +6,7 @@ internal enum ErrorCode
 {
 	None = 0,
 
-	Unhandled = 1,
+	General = 1,
 
 	InvalidParameter = 2,
 
