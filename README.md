@@ -45,6 +45,10 @@ internal class Incident
 	}
 }
 ```
+
+### Validation
+As for the validation, I would move it on a different layer, not within `CalculateUrgency()`.
+
 ### Sample output
 
 | Severity | Hours Passed | Urgency |
